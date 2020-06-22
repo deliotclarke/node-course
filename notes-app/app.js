@@ -9,8 +9,20 @@ yargs.version('yourboy_1.1.0');
 yargs.command({
   command: 'add',
   describe: 'add a new note. doi.',
-  handler: function () {
-    console.log('adding a new note');
+  builder: {
+    title: {
+      describe: "Your note's title",
+      demandOption: true,
+      type: 'string',
+    },
+    body: {
+      describe: "Your note's body",
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler: function (argv) {
+    console.log(`title: ${argv.title} \nbody: ${argv.body}`);
   },
 });
 
@@ -41,4 +53,4 @@ yargs.command({
   },
 });
 
-console.log(yargs.argv);
+yargs.parse();
