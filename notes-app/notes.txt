@@ -1,3 +1,0 @@
-My name is the boy.
-
-And I am here to make some Node.
