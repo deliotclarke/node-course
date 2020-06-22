@@ -1,8 +1,11 @@
-const validator = require('validator');
+const chalk = require('chalk');
 const getNotes = require('./notes');
+const log = console.log;
 
-console.log(getNotes());
+const inverseError = chalk.bold.inverse.red;
 
-console.log(validator.isEmail('ItmeClarke@example.com'));
+log(getNotes());
 
-console.log(validator.isURL('www.mead.io'));
+log(chalk.greenBright('Success!'));
+
+log(inverseError('INVERTED ERR'));
