@@ -54,8 +54,8 @@ yargs.command({
 yargs.command({
   command: 'read',
   describe: 'read your own note.',
-  handler() {
-    console.log('this is where your note would be if you had one.');
+  handler(argv) {
+    notes.readNote(argv.title);
   },
 });
 
