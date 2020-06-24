@@ -1,13 +1,9 @@
-console.log('weather boys');
+const request = require('postman-request');
+const access = require('./weatherKey');
 
-setTimeout(() => {
-  console.log('2 second timer');
-}, 2000);
+const url = `http://api.weatherstack.com/current?access_key=${access.key}&query=37.8267,-122.4233`;
 
-setTimeout(() => {
-  console.log('0 second timer');
-}, 0);
-
-console.log('end of the weather boys');
-
-// really interesting outcome due to setTimeout being a node api function not a part of js and becaue of callback cues!!
+request({ url }, (error, response) => {
+  const parsedData = JSON.parse(response.body);
+  console.log(parsedData.current);
+});
