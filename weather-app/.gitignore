@@ -1,4 +1,4 @@
 /node_modules
 
-weatherKey.js
-locationKey.js
+utils/weatherKey.js
+utils/locationKey.js
