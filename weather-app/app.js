@@ -1,9 +1,21 @@
-const request = require('postman-request');
-const access = require('./weatherKey');
+const forecast = require('./utils/forecast');
+const geocode = require('./utils/geocode');
 
-const url = `http://api.weatherstack.com/current?access_key=${access.key}&query=37.8267,-122.4233`;
+const command = process.argv[2];
 
-request({ url }, (error, response) => {
-  const parsedData = JSON.parse(response.body);
-  console.log(parsedData.current);
-});
+if (command !== undefined) {
+  geocode(command, (error, { latitude, longitude, location } = {}) => {
+    if (error) {
+      return console.log(error);
+    }
+    forecast(latitude, longitude, (error, forecastData) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log(location);
+      console.log(forecastData);
+    });
+  });
+} else {
+  console.log('Please enter a location');
+}
