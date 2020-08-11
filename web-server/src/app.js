@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 app.get('', (req, res) => {
-  res.send('Hello from exxxxxxxpresssssss!');
+  res.send('<title>It sure is WEATHER outside!</title>');
 });
 
 app.get('/help', (req, res) => {
@@ -11,11 +11,14 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-  res.send("It's ABOUT time.");
+  res.send("<h1>It's ABOUT time.</h1>");
 });
 
 app.get('/weather', (req, res) => {
-  res.send('Cloudy with a chance of global pandemic.');
+  res.send({
+    forecast: 'Cloudy with a chance of global pandemic',
+    location: 'Like the whole world',
+  });
 });
 
 app.listen(3000, () => {
