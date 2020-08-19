@@ -47,6 +47,22 @@ app.get('/weather', (req, res) => {
   });
 });
 
+app.get('/help/*', (req, res) => {
+  res.render('404', {
+    title: 'lolo404olol',
+    name: 'Jaoquin Phoenix',
+    message: 'Help article not found',
+  });
+});
+
+app.get('*', (req, res) => {
+  res.render('404', {
+    title: 'lolo404olol',
+    name: 'Don Quixote',
+    message: 'Sorry we could not find your page.',
+  });
+});
+
 app.listen(3000, () => {
   console.log('server running on port 3000');
 });
