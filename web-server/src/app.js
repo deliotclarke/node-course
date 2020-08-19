@@ -20,7 +20,7 @@ app.use(express.static(publicDirPath));
 // example for serving/rendering a dynamic page
 app.get('', (req, res) => {
   res.render('index', {
-    title: 'Welcome to thisisarealwebsite.com',
+    title: 'Welcome to Weather',
     name: 'Eliot Clarke',
   });
 });
@@ -34,7 +34,7 @@ app.get('/about', (req, res) => {
 
 app.get('/help', (req, res) => {
   res.render('help', {
-    title: 'I need somebody.',
+    title: 'Halp',
     name: 'Bob Newhart',
     message: "You friggin' need help, dawg.",
   });
