@@ -41,9 +41,29 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      message: 'You gotta ask to receive, bud.',
+      error: 'No address query provided',
+    });
+  }
   res.send({
     forecast: 'Cloudy with a chance of global pandemic',
     location: 'Like the whole world',
+    address: req.query.address,
+  });
+});
+
+app.get('/products', (req, res) => {
+  if (!req.query.search) {
+    return res.send({
+      message: 'You gotta ask to receive, bud.',
+      error: 'No search query provided',
+    });
+  }
+  console.log(req.query.search);
+  res.send({
+    products: [],
   });
 });
 
