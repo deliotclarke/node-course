@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
 const app = express();
 
@@ -41,9 +43,48 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      message: 'You gotta ask to receive, bud.',
+      error: 'No address query provided',
+    });
+  } else {
+    let queryString = req.query.address;
+    geocode(queryString, (error, { latitude, longitude, location } = {}) => {
+      if (error) {
+        return res.send({
+          message: 'There was a problem.',
+          error,
+        });
+      }
+      forecast(latitude, longitude, (error, forecastData) => {
+        if (error) {
+          return res.send({
+            message: 'There was a problem.',
+            error,
+          });
+        }
+
+        res.send({
+          forecast: forecastData,
+          location,
+          address: queryString,
+        });
+      });
+    });
+  }
+});
+
+app.get('/products', (req, res) => {
+  if (!req.query.search) {
+    return res.send({
+      message: 'You gotta ask to receive, bud.',
+      error: 'No search query provided',
+    });
+  }
+  console.log(req.query.search);
   res.send({
-    forecast: 'Cloudy with a chance of global pandemic',
-    location: 'Like the whole world',
+    products: [],
   });
 });
 
